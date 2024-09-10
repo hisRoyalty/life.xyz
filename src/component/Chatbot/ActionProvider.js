@@ -5,7 +5,9 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const handleMessage = async (mes) => {
     try {
       // See: setupProxy.js: used to bypass CORS
-      let res = await axios.get(`/api/v1/conversation.jsp?appid=G3JE7G-KV8VGPXP5R&i=${encodeURIComponent(mes)}`);
+
+      // PLEASE REPLACE APPID WITH VALID APP ID. 
+      let res = await axios.get(`/api/v1/conversation.jsp?appid=12345678&i=${encodeURIComponent(mes)}`);
 
       
 
@@ -18,7 +20,8 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       } else {
         // Fallback response : Wolfram's API is not always stable, incase there is no response, we'll fetch the response from brainshop
         // See: react-chatbot-kit documentation as well
-        const fallbackRes = await axios.get(`/br/get?bid=182816&key=2km3nFstbDcXtJcq&uid=1&msg=${encodeURIComponent(mes)}`);
+        // REPLACE BID/KEY WITH VALID APP ID
+        const fallbackRes = await axios.get(`/br/get?bid=1234&key=1234&uid=1&msg=${encodeURIComponent(mes)}`);
         // debug console.log(fallbackRes)
         const fallbackMessage = createChatBotMessage(fallbackRes.data.cnt);
         setState((prev) => ({
